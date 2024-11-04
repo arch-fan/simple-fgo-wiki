@@ -1,17 +1,5 @@
-import type { MetaFunction } from "react-router";
+import Todo from "./todo";
 
-export const meta: MetaFunction = () => {
-  return [
-    { title: "Simple FGO Wiki" },
-    { name: "description", content: "EZZZZ!" },
-  ];
-};
-
-export default function Home() {
-  return (
-    <>
-      <h1>Hello</h1>
-      <p>Using Remix FGO!</p>
-    </>
-  );
+export default function CraftEssences() {
+  return <Todo />;
 }

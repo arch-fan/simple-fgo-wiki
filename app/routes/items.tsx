@@ -1,5 +1,5 @@
 import Todo from "./todo";
 
-export default function MysticCodes() {
+export default function Items() {
   return <Todo />;
 }
