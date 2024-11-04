@@ -26,18 +26,16 @@ jobs:
         run: npm run build
 
       - name: Upload build artifacts
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: build
-          name: github-pages
+          path: build/
 
-  # Deploy job
   deploy:
     needs: build
 
     permissions:
-      pages: write # to deploy to Pages
-      id-token: write # to verify the deployment originates from an appropriate source
+      pages: write
+      id-token: write
 
     environment:
       name: github-pages
