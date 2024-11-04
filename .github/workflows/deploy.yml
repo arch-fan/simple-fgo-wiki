@@ -6,6 +6,7 @@ on:
       - main
 
 jobs:
+  # Build job
   build:
     runs-on: ubuntu-latest
 
@@ -24,14 +25,25 @@ jobs:
       - name: Build the app
         run: npm run build
 
-      - name: Configure Git
-        run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
+      - name: Upload build artifacts
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: build
 
+  # Deploy job
+  deploy:
+    needs: build
+
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to GitHub Pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          npm install -g gh-pages
-          gh-pages -d build
+        id: deployment
+        uses: actions/deploy-pages@v4
