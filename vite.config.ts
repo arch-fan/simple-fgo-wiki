@@ -7,6 +7,7 @@ export default defineConfig({
     reactRouter({
       ssr: false,
       prerender: true,
+      basename: "/simple-fgo-wiki",
     }),
     tsconfigPaths(),
   ],
